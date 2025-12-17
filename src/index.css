@@ -108,7 +108,7 @@ button {
 .cart-items .cart-total {
   background-color: white;
   padding: 20px;
-  height: 150px;
+  height: auto;
   margin-bottom: 30px;
 }
 
@@ -235,6 +235,35 @@ button.delete {
 button.delete ion-icon {
   font-size: 30px;
 }
+.checkout-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #0f3460;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cart-total .checkout-btn {
+  box-sizing: border-box;
+}
+
+.checkout-btn:hover {
+  background-color: #092244;
+}
+
+.checkout-btn:disabled,
+.checkout-btn[disabled] {
+  background-color: #c0c4cc;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
 
 @media (max-width: 575px) {
   .cart-content .cart-details h3 {

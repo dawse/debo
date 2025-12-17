@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,10 +6,22 @@ import {
   decreaseQty,
   deleteProduct,
 } from "../app/features/cart/cartSlice";
+import Checkout from "../components/Checkout/Checkout";
 
 const Cart = () => {
   const { cartList } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [showCheckout, setShowCheckout] = useState(false);
+
+  const handleOpenCheckout = () => setShowCheckout(true);
+  const handleCloseCheckout = () => setShowCheckout(false);
+
+  const handleOrderConfirm = (customer) => {
+    if (cartList.length === 0) return alert("Le panier est vide.");
+    // Here you could send the order and customer info to a server
+    cartList.forEach((item) => dispatch(deleteProduct(item)));
+    alert(`Commande confirmée. Merci ${customer.name} !`);
+  };
   // middlware to localStorage
   const totalPrice = cartList.reduce(
     (price, item) => price + item.qty * item.price,
@@ -83,10 +95,22 @@ const Cart = () => {
                 <h4>Prix total :</h4>
                 <h3>{totalPrice}.00 DT</h3>
               </div>
+               <button
+                 className="checkout-btn"
+                 disabled={totalPrice === 0}
+                 onClick={handleOpenCheckout}
+               >
+                 Confirmer la commande
+               </button>
             </div>
           </Col>
         </Row>
       </Container>
+      <Checkout
+        show={showCheckout}
+        onClose={handleCloseCheckout}
+        onConfirm={handleOrderConfirm}
+      />
     </section>
   );
 };

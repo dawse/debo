@@ -14,7 +14,7 @@ const ProductDetails = ({ selectedProduct }) => {
   };
   const handelAdd = (selectedProduct, quantity) => {
     dispatch(addToCart({ product: selectedProduct, num: quantity }));
-    toast.success("Product has been added to cart!");
+    toast.success("Le produit a été ajouté au panier !");
   };
 
   return (
